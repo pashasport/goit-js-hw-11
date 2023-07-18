@@ -48,11 +48,11 @@ function onSubmitForm(event) {
           paramsForNotify
         );
       } else {
-        // Notify.info(
-        //   `Hooray! We found ${data.totalHits} images.`,
-        //   paramsForNotify
-        // );
-        // console.log(searchResults);
+        Notify.info(
+          `Hooray! We found ${data.totalHits} images.`,
+          paramsForNotify
+        );
+
         createMarkup(searchResults);
         lightbox.refresh();
       }
