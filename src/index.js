@@ -57,7 +57,7 @@ function onSubmitForm(event) {
         lightbox.refresh();
       }
       if (data.totalHits > perPage) {
-        // btnLoadMore.classList.remove('is-hidden');
+        btnLoadMore.classList.remove('is-hidden');
         window.addEventListener('scroll', showLoadMorePage);
       }
       // scrollPage();
