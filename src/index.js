@@ -57,7 +57,7 @@ function onSubmitForm(event) {
         lightbox.refresh();
       }
       if (data.totalHits > perPage) {
-        // btnLoadMore.classList.remove('is-hidden');
+        btnLoadMore.classList.remove('is-hidden');
         window.addEventListener('scroll', showLoadMorePage);
       }
       // scrollPage();
@@ -78,12 +78,12 @@ function onClickLoadMore() {
 
       createMarkup(searchResults);
       if (page === numberOfPage) {
-        // btnLoadMore.classList.add('is-hidden');
+        btnLoadMore.classList.add('is-hidden');
         Notify.info(
           "We're sorry, but you've reached the end of search results.",
           paramsForNotify
         );
-        // btnLoadMore.removeEventListener('click', onClickLoadMore);
+        btnLoadMore.removeEventListener('click', onClickLoadMore);
         window.removeEventListener('scroll', showLoadMorePage);
       }
       lightbox.refresh();
