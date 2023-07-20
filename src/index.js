@@ -82,7 +82,7 @@ function onClickLoadMore() {
         window.removeEventListener('scroll', showLoadMorePage);
       }
       lightbox.refresh();
-      // scrollPage();npm
+      // scrollPage();
     })
     .catch(onFetchError);
 }
