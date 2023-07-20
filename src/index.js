@@ -73,7 +73,7 @@ function onClickLoadMore() {
 
       createMarkup(searchResults);
       if (page === numberOfPage) {
-        btnLoadMore.classList.add('is-hidden');
+        // btnLoadMore.classList.add('is-hidden');
         Notify.info(
           "We're sorry, but you've reached the end of search results.",
           paramsForNotify
@@ -82,7 +82,7 @@ function onClickLoadMore() {
         window.removeEventListener('scroll', showLoadMorePage);
       }
       lightbox.refresh();
-      // scrollPage();
+      // scrollPage();npm
     })
     .catch(onFetchError);
 }
