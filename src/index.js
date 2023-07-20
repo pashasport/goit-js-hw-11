@@ -15,7 +15,7 @@ const paramsForNotify = {
 
 const perPage = 40;
 let page = 1;
-let q = '';
+let keyOfSearchPhoto = '';
 
 btnLoadMore.classList.add('is-hidden');
 
@@ -27,15 +27,19 @@ function onSubmitForm(event) {
   gallery.innerHTML = '';
   page = 1;
   const { searchQuery } = event.currentTarget.elements;
-  q = searchQuery.value.trim().toLowerCase().split(' ').join('+');
-  // console.log(onSubmitForm());
+  keyOfSearchPhoto = searchQuery.value
+    .trim()
+    .toLowerCase()
+    .split(' ')
+    .join('+');
+  // console.log(keyOfSearchPhoto);
 
-  if (q === '') {
+  if (keyOfSearchPhoto === '') {
     Notify.info('Enter your request, please!', paramsForNotify);
     return;
   }
 
-  fetchPhoto(q, page, perPage)
+  fetchPhoto(keyOfSearchPhoto, page, perPage)
     .then(data => {
       const searchResults = data.hits;
       if (data.totalHits === 0) {
@@ -48,6 +52,7 @@ function onSubmitForm(event) {
           `Hooray! We found ${data.totalHits} images.`,
           paramsForNotify
         );
+        // console.log(searchResults);
         createMarkup(searchResults);
         lightbox.refresh();
       }
@@ -66,7 +71,7 @@ function onSubmitForm(event) {
 
 function onClickLoadMore() {
   page += 1;
-  fetchPhoto(q, page, perPage)
+  fetchPhoto(keyOfSearchPhoto, page, perPage)
     .then(data => {
       const searchResults = data.hits;
       const numberOfPage = Math.ceil(data.totalHits / perPage);
@@ -78,7 +83,7 @@ function onClickLoadMore() {
           "We're sorry, but you've reached the end of search results.",
           paramsForNotify
         );
-        btnLoadMore.removeEventListener('click', onClickLoadMore);
+        // btnLoadMore.removeEventListener('click', onClickLoadMore);
         window.removeEventListener('scroll', showLoadMorePage);
       }
       lightbox.refresh();
