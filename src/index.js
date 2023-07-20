@@ -15,7 +15,7 @@ const paramsForNotify = {
 
 const perPage = 40;
 let page = 1;
-let keyOfSearchPhoto = '';
+let q = '';
 
 btnLoadMore.classList.add('is-hidden');
 
@@ -27,19 +27,15 @@ function onSubmitForm(event) {
   gallery.innerHTML = '';
   page = 1;
   const { searchQuery } = event.currentTarget.elements;
-  keyOfSearchPhoto = searchQuery.value
-    .trim()
-    .toLowerCase()
-    .split(' ')
-    .join('+');
-  // console.log(keyOfSearchPhoto);
+  q = searchQuery.value.trim().toLowerCase().split(' ').join('+');
+  // console.log(onSubmitForm());
 
-  if (keyOfSearchPhoto === '') {
+  if (q === '') {
     Notify.info('Enter your request, please!', paramsForNotify);
     return;
   }
 
-  fetchPhoto(keyOfSearchPhoto, page, perPage)
+  fetchPhoto(q, page, perPage)
     .then(data => {
       const searchResults = data.hits;
       if (data.totalHits === 0) {
@@ -52,26 +48,25 @@ function onSubmitForm(event) {
           `Hooray! We found ${data.totalHits} images.`,
           paramsForNotify
         );
-
         createMarkup(searchResults);
         lightbox.refresh();
       }
       if (data.totalHits > perPage) {
-        btnLoadMore.classList.remove('is-hidden');
+        // btnLoadMore.classList.remove('is-hidden');
         window.addEventListener('scroll', showLoadMorePage);
       }
       // scrollPage();
     })
     .catch(onFetchError);
 
-  btnLoadMore.addEventListener('click', onClickLoadMore);
+  // btnLoadMore.addEventListener('click', onClickLoadMore);
 
   event.currentTarget.reset();
 }
 
 function onClickLoadMore() {
   page += 1;
-  fetchPhoto(keyOfSearchPhoto, page, perPage)
+  fetchPhoto(q, page, perPage)
     .then(data => {
       const searchResults = data.hits;
       const numberOfPage = Math.ceil(data.totalHits / perPage);
