@@ -64,7 +64,7 @@ function onSubmitForm(event) {
     })
     .catch(onFetchError);
 
-  // btnLoadMore.addEventListener('click', onClickLoadMore);
+  btnLoadMore.addEventListener('click', onClickLoadMore);
 
   event.currentTarget.reset();
 }
